@@ -164,3 +164,4 @@ cython_debug/
 # additional
 laptop/
 laptop_price_prediction.egg-info/
+.env
