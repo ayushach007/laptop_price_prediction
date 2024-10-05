@@ -16,7 +16,10 @@ class DataIngestion:
         This function reads data from the SQL database, splits it into train and test data and saves it in the specified paths
         
         Returns:
-            - Tuple[pd.DataFrame, pd.DataFrame]: Train and Test data
+            - Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]: Paths to the raw, train and test data
+        
+        Raises:
+            - Error: If there is an error reading the data or splitting the data
         '''
         
         try:

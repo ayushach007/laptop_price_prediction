@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler, OrdinalEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from src.laptop_price_prediction.entity.config_entity import DataTransformationConfig
-from src.laptop_price_prediction.utils.common import save_object
+from src.laptop_price_prediction.utils.common import save_object, save_transformed_data
 from pathlib import Path
 from src.laptop_price_prediction.logger import logging
 
@@ -15,6 +15,15 @@ class DataTransformation:
         self.config = config
 
     def create_preprocessor(self) -> pd.DataFrame:
+        '''
+        Create a preprocessor to transform the data
+        
+        Returns:
+            - pd.DataFrame: Preprocessor to transform the data
+
+        Raises:
+            - Error: If there is an error creating the preprocessor
+        '''
         try:
             numeric_features = ['Inches', 'Ram', 'Weight']
             categorical_features = ['Company', 'Product', 'TypeName', 'ScreenResolution', 'Cpu', 'Memory', 'Gpu', 'OpSys']
@@ -50,14 +59,27 @@ class DataTransformation:
             raise e
         
     
-    def initiate_data_transformation(self, train_data_path: Path, test_data_path: Path) -> pd.DataFrame:
+    def initiate_data_transformation(self, train_data, test_data):
+        '''
+        This function reads the train and test data, splits the data into features and target, transforms the data and saves the transformed data
+        
+        Args:
+            - train_data: Path to the train data
+            - test_data: Path to the test data
+            
+        Returns:
+            - tuple: Transformed train and test data and preprocessor path
+
+        Raises:
+            - Error: If there is an error reading the data or transforming the data
+        '''
         
         try:
             logging.info(f"Initiating data transformation")
 
             logging.info(f"Reading train and test data")
-            train_data = pd.read_csv(train_data_path)
-            test_data = pd.read_csv(test_data_path)
+            train_data = pd.read_csv(train_data)
+            test_data = pd.read_csv(test_data)
 
             logging.info(f"Data read successfully")
 
@@ -114,12 +136,22 @@ class DataTransformation:
             logging.info(f"Preprocessor saved successfully")    
 
             logging.info(f"Saving transformed train and test data")
-            np.save(self.config.train_arr_path, train_arr)
-            np.save(self.config.test_arr_path, test_arr)
+            save_transformed_data(
+                data=train_arr,
+                file_path=self.config.train_arr_path
+            )
+
+            save_transformed_data(
+                data = test_arr,
+                file_path = self.config.test_arr_path
+            )
+
+            logging.info(f"Transformed data saved successfully")
 
             return (
                 train_arr,
-                test_arr
+                test_arr,
+                self.config.preprocessor_path
             )
         
         except Exception as e:

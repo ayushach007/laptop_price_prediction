@@ -3,10 +3,19 @@ from src.laptop_price_prediction.config.configurations import ConfigurationManag
 from src.laptop_price_prediction.components.data_ingestion import DataIngestion
 
 class DataIngestionPipeline:
-    def __init__(self, config):
-        self.config = config
+    def __init__(self) -> None:
+        pass
 
     def main(self):
+        '''
+        This function initiates the data ingestion pipeline
+
+        Returns:
+            - Tuple[pd.DataFrame, pd.DataFrame]: Paths to the train and test data
+
+        Raises:
+            - Error: If there is an error in the data ingestion pipeline
+        '''
         try:
             config_manager = ConfigurationManager()
             data_ingestion_config = config_manager.get_data_ingestion_config()
@@ -24,7 +33,7 @@ STAGE_NAME = "Data Ingestion"
 if __name__ == "__main__":
     try:
         logging.info(f"Initiating {STAGE_NAME} Pipeline")
-        DataIngestionPipeline(config=None).main()
+        DataIngestionPipeline().main()
         logging.info(f"{STAGE_NAME} Pipeline completed successfully")
     
     except Exception as e:

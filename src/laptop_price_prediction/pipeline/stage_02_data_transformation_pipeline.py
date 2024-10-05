@@ -4,16 +4,25 @@ from src.laptop_price_prediction.config.configurations import ConfigurationManag
 from src.laptop_price_prediction.components.data_transformation import DataTransformation
 
 class DataTransformationPipeline(DataIngestionPipeline):
-    def __init__(self, train_data_path, test_data_path):
-        self.train_data_path = train_data_path
-        self.test_data_path = test_data_path
+    def __init__(self, train_path, test_path):
+        self.train_path = train_path
+        self.test_path = test_path
 
     def main(self):
+        '''
+        This function initiates the data transformation pipeline
+        
+        Returns:
+            - Tuple[np.ndarray, np.ndarray]: Transformed train and test data
+
+        Raises:
+            - Error: If there is an error in the data transformation pipeline
+        '''
         try:
             config = ConfigurationManager()
             data_transformation_config = config.get_data_transformation_config()
             data_transformation = DataTransformation(data_transformation_config)
-            train_arr, test_arr =data_transformation.initiate_data_transformation(self.train_data_path, self.test_data_path)
+            train_arr, test_arr, _ =data_transformation.initiate_data_transformation(train_data_path=self.train_path, test_data_path=self.test_path)
 
             return train_arr, test_arr
         
@@ -27,12 +36,13 @@ if __name__ == "__main__":
     try:
         logging.info(f"Initiating {STAGE_NAME} Pipeline")
 
-        logging.info(f"Reading data from previous stage: 'Data Ingestion Pipeline' ")
-        train_data_path, test_data_path = DataIngestionPipeline().main()
+        logging.info(f"Reading data 1st previous stage: 'Data Ingestion Pipeline' ")
+        data_ingestion_pipeline = DataIngestionPipeline()
+        train_path, test_path = data_ingestion_pipeline.main()
 
         logging.info(f"Data read successfully")
-
-        train_arr, test_arr = DataTransformationPipeline(train_data_path, test_data_path).main()
+        data_transformation_pipeline = DataTransformationPipeline((train_path, test_path))
+        train_arr, test_arr = data_transformation_pipeline.main()
         logging.info(f"{STAGE_NAME} Pipeline completed successfully")        
     
     except Exception as e:
