@@ -22,6 +22,8 @@ files = [
     f'src/{project_name}/entity/config_entity.py',
     f'src/{project_name}/constants/__init__.py',
     f'src/{project_name}/constants/constant.py',
+    f'src/{project_name}/config/__init__.py',
+    f'src/{project_name}/config/configurations.py',
     'notebook/data_ingestion.ipynb',
     'notebook/data_transformation.ipynb',
     'notebook/model_building.ipynb',
