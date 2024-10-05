@@ -68,7 +68,7 @@ class CustomData():
         
 
     
-    def get_data_as_dataframe(self) -> pd.DataFrame:
+    def get_data_as_dataframe(self):
         try:
             logging.info('Creating dataframe from custom data')
             data = {
