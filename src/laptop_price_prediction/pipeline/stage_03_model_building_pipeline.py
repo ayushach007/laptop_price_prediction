@@ -26,24 +26,4 @@ class ModelBuildingPipeline(DataTransformationPipeline):
             logging.error(f"Error in Model Building Pipeline: {e}")
             raise e
         
-STAGE_NAME = "Model Building"
-
-if __name__ == "__main__":
-    try:
-        logging.info(f"Reading data from 2nd stage: 'Data Transformation Pipeline' ")
-
-        data_transformation_pipeline = DataTransformationPipeline()
-        train_arr, test_arr = data_transformation_pipeline.main()
-        
-        logging.info(f"Data read successfully from 2nd stage")
-
-        logging.info(f"Initiating {STAGE_NAME} Pipeline")
-        model_building_pipeline = ModelBuildingPipeline(train_arr, test_arr)
-        model_building_pipeline.main()
-        
-        logging.info(f"{STAGE_NAME} Pipeline completed successfully")
-
-    except Exception as e:
-        logging.error(f"Error in {STAGE_NAME} Pipeline: {e}")
-        raise e
 

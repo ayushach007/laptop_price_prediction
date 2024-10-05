@@ -26,17 +26,4 @@ class DataIngestionPipeline:
         except Exception as e:
             logging.error(f"Error in data ingestion pipeline: {e}")
             raise e
-        
-
-STAGE_NAME = "Data Ingestion"
-
-if __name__ == "__main__":
-    try:
-        logging.info(f"Initiating {STAGE_NAME} Pipeline")
-        DataIngestionPipeline().main()
-        logging.info(f"{STAGE_NAME} Pipeline completed successfully")
-    
-    except Exception as e:
-        logging.error(f"Error in {STAGE_NAME} Pipeline: {e}")
-        raise e
 

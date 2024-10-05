@@ -30,21 +30,3 @@ class DataTransformationPipeline(DataIngestionPipeline):
             logging.error(f"Error in data transformation pipeline: {e}")
             raise e
         
-STAGE_NAME = "Data Transformation"
-
-if __name__ == "__main__":
-    try:
-        logging.info(f"Initiating {STAGE_NAME} Pipeline")
-
-        logging.info(f"Reading data 1st previous stage: 'Data Ingestion Pipeline' ")
-        data_ingestion_pipeline = DataIngestionPipeline()
-        train_path, test_path = data_ingestion_pipeline.main()
-
-        logging.info(f"Data read successfully")
-        data_transformation_pipeline = DataTransformationPipeline((train_path, test_path))
-        train_arr, test_arr = data_transformation_pipeline.main()
-        logging.info(f"{STAGE_NAME} Pipeline completed successfully")        
-    
-    except Exception as e:
-        logging.error(f"Error in {STAGE_NAME} Pipeline: {e}")
-        raise e
