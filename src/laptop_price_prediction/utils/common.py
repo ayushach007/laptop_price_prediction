@@ -70,7 +70,7 @@ def read_yaml(yamal_file_path: Path) -> ConfigBox:
     
 
 @ensure_annotations
-def save_object(obj: str, file_path: Path):
+def save_object(obj, file_path):
     '''
     Save object to a file
 

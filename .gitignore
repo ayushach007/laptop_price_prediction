@@ -166,3 +166,4 @@ laptop/
 laptop_price_prediction.egg-info/
 .env
 logs
+artifacts/

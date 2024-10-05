@@ -1,9 +1,9 @@
 from src.laptop_price_prediction.utils.common import read_yaml, create_directories
 from src.laptop_price_prediction.entity.config_entity import DataIngestionConfig
-from src.laptop_price_prediction.components.data_ingestion import DataIngestion
-
-from src.laptop_price_prediction.constants.constant import *
+from src.laptop_price_prediction.entity.config_entity import DataTransformationConfig
 from src.laptop_price_prediction.logger import logging
+from src.laptop_price_prediction.constants.constant import *
+
 
 class ConfigurationManager:
     def __init__(self, config_file_path = CONFIG_FILE_PATH):
@@ -59,14 +59,28 @@ class ConfigurationManager:
             raise e
         
 
-if __name__ == "__main__":
-    try:
-        logging.info(f'Initiating Data Ingestion')
-        config_manager = ConfigurationManager()
-        data_ingestion_config = config_manager.get_data_ingestion_config()
-        data_ingestion = DataIngestion(data_ingestion_config)
-        data_ingestion.initiate_data_ingestion()
-        logging.info(f'Data Ingestion completed successfully')
-    except Exception as e:
-        logging.error(f'Error: {e}')
-        raise e
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        try:
+            config = self.config.data_transformation
+            logging.info(f"Data Ingestion Configuration loaded successfully")
+
+            logging.info(f"Creating directories to store data")
+            create_directories([config.root_dir])
+
+            logging.info(f"Successfully created directories to store data")
+
+            logging.info(f"Assigning paths to raw, train and test data")
+            
+            data_ingestion_config = DataTransformationConfig(
+                preprocessor_path=config.preprocessor_path,
+                train_arr_path=config.train_arr_path,
+                test_arr_path=config.test_arr_path
+            )
+
+            logging.info(f"Paths assigned successfully")
+            
+            return data_ingestion_config
+        
+        except Exception as e:
+            logging.error(f"Error loading data ingestion configuration: {e}")
+            raise e
