@@ -48,7 +48,7 @@ The main goal of this app is to provide users with an estimated laptop price bas
 
 - **Programming Language**: Python
 - **Libraries**: Sklearn, Streamlit
-- **Database**: MySQL (Data sourced from [Kaggle](https://www.kaggle.com))
+- **Database**: MySQL (Data sourced from [Kaggle](https://www.kaggle.com/datasets/muhammetvarl/laptop-price))
 - **Deployment**: Docker, GitHub Actions, Amazon EC2, and ECR
 - **Version Control**: GitHub
 
