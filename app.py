@@ -40,69 +40,69 @@ def main():
             with comp:
                 Company = st.selectbox(
                     label='Company',
-                    options=data['Company'].unique()
+                    options=[None] + list(data['Company'].unique())
                 )
 
             with prod:
                 Product = st.selectbox(
                     label='Product',
-                    options=data['Product'].unique()
+                    options=[None] + list(data['Product'].unique())
                 )
 
             with name:
                 Type_Name = st.selectbox(
                     label='TypeName',
-                    options=data['TypeName'].unique()
+                    options=[None] + list(data['TypeName'].unique())
                 )
 
             with inch:
                 Inches = st.number_input(
                     label='Inches',
-                    min_value=8.0,
+                    min_value=0.0,
                     max_value=20.0
                 )
             
             with scr:
                 ScreenResolution = st.selectbox(
                     label='ScreenResolution',
-                    options=data['ScreenResolution'].unique()
+                    options=[None] + list(data['ScreenResolution'].unique())
                 )
 
             with cpu:
                 Cpu = st.selectbox(
                     label='Cpu',
-                    options=data['Cpu'].unique()
+                    options=[None] + list(data['Cpu'].unique())
                 )
 
             with ram:
                 Ram = st.number_input(
                     label='Ram',
-                    min_value=2,
+                    min_value=0,
                     max_value=64
                 )
 
             with mem:
                 Memory = st.selectbox(
                     label='Memory',
-                    options=data['Memory'].unique()
+                    options=[None] + list(data['Memory'].unique())
                 )
 
             with gpu:
                 Gpu = st.selectbox(
                     label='Gpu',
-                    options=data['Gpu'].unique()
+                    options=[None] + list(data['Gpu'].unique())
                 )
 
             with opsys:
                 OpSys = st.selectbox(
                     label='OpSys',
-                    options=data['OpSys'].unique()
+                    options=[None] + list(data['OpSys'].unique())
                 )
 
             with weight:
                 Weight = st.number_input(
                     label='Weight',
-                    min_value=1.0,
+                    min_value=0.0,
                     max_value=10.0
                 )
 
