@@ -56,7 +56,7 @@ The main goal of this app is to provide users with an estimated laptop price bas
 
 1. **Clone the repository**:
    ```bash
-   git clone <your-repo-link>
+   git clone https://github.com/ayushach007/laptop_price_prediction
    ```
 
 2. **Create a virtual environment**:
@@ -67,7 +67,7 @@ The main goal of this app is to provide users with an estimated laptop price bas
 
    Or using `conda`:
    ```bash
-   conda create --name laptop_price_pred python=3.x
+   conda create --name laptop_price_pred python=3.11
    conda activate laptop_price_pred
    ```
 
